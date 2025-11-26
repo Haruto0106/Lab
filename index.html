@@ -1,54 +1,11 @@
-<!DOCTYPE html><html lang="ja"> <head><meta charset="UTF-8"><meta name="description" content="山下研究室のWebサイト"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>ホーム | 山下研究室</title><!-- Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/Lab/_astro/index.DtvFk_LB.css"></head> <!-- ↓↓↓ 変更点1：bodyに 'min-h-screen flex flex-col' を追加 --> <body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col"> <header class="..."> <!-- ...省略... --> <!-- ロゴ部分のリンク --> <!-- 「/」だけだとドメインルートに戻ってしまうので修正 --> <a href="/Lab" class="...">
+<!DOCTYPE html><html lang="ja"> <head><meta charset="UTF-8"><meta name="description" content="山下研究室のWebサイト"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>ホーム | 山下研究室</title><!-- Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/Lab/_astro/index.B_9UAqmC.css"></head> <!-- ↓↓↓ 変更点1：bodyに 'min-h-screen flex flex-col' を追加 --> <body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col"> <header class="bg-white shadow-md sticky top-0 z-50"> <div class="container mx-auto px-6 py-4 flex justify-between items-center relative"> <!-- ロゴ部分 --> <a href="/Lab/" class="text-xl font-bold text-slate-800 hover:text-blue-600 transition z-50 relative">
 〇〇研究室
-</a> <!-- PC用ナビゲーション --> <nav class="hidden md:flex space-x-8"> <!-- 2. hrefの書き方を変更 --> <!-- 「base + '/パス'」という書き方にします --> <a href="/Lab/" class="...">ホーム</a> <a href="/Lab/professor" class="...">教授紹介</a> <a href="/Lab/members" class="...">メンバー</a> <a href="/Lab/research" class="...">研究紹介</a> </nav> <!-- スマホ用メニューの中身も同様に修正 --> <nav id="mobile-menu" class="..."> <a href="/Lab/" class="...">ホーム</a> <a href="/Lab/professor" class="...">教授紹介</a> <a href="/Lab/members" class="...">メンバー</a> <a href="/Lab/research" class="...">研究紹介</a> </nav> </header> <!-- ...スクリプト... -->
-```
-
----
-
-### 修正2：トップページなどの動的なリンク
-
-`index.astro`、`research.astro`、`members.astro` などの一覧ページにあるカードのリンクも修正が必要です。
-
-**例：`src/pages/research.astro` の場合**
-
-```astro
----
-// ファイルの上の方で base を定義
-const base = import.meta.env.BASE_URL;
-// ...
----
-<!-- ... --> <!-- リンク先を修正 -->
-    <!-- 変更前: href={`/research/${project.slug}`} -->
-    <!-- 変更後: -->
-    <a href="/Lab/research/boom" class="..."> <!-- ... --> </a><!-- リンク先を修正 -->
-    <!-- 変更前: href={`/research/${project.slug}`} -->
-    <!-- 変更後: -->
-    <a href="/Lab/research/cfd" class="..."> <!-- ... --> </a> <!-- ... -->
-```
-
-※ `index.astro` の最新情報や、`members.astro` のメンバー詳細リンクも同様に `$/Lab` を先頭につけてください。
-
----
-
-### 修正3：「戻るボタン」などの固定リンク
-
-詳細ページ（`[...slug].astro`）にある「一覧に戻る」ボタンも忘れずに。
-
-**例：`src/pages/research/[...slug].astro`**
-
-```astro
----
-const base = import.meta.env.BASE_URL;
-// ...
----
-<!-- 変更前: href="/research" --> <a href="/Lab/research" class="...">
-← 研究紹介一覧に戻る
-</a> <!-- ここに中身が入る -->   <section class="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-24"> <div class="container mx-auto px-6 text-center"> <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+<span class="text-xs font-normal text-slate-500 block">Aerospace & Fluid Dynamics</span> </a> <!-- PC用ナビゲーション (中サイズ以上の画面で表示) --> <nav class="hidden md:flex space-x-8"> <a href="/Lab/" class="text-slate-600 hover:text-blue-600 font-medium transition">ホーム</a> <a href="/Lab/professor" class="text-slate-600 hover:text-blue-600 font-medium transition">教授紹介</a> <a href="/Lab/members" class="text-slate-600 hover:text-blue-600 font-medium transition">メンバー</a> <a href="/Lab/research" class="text-slate-600 hover:text-blue-600 font-medium transition">研究紹介</a> </nav> <!-- スマホ用ハンバーガーボタン (mdサイズ未満で表示) --> <button id="menu-btn" class="block md:hidden z-50 focus:outline-none p-2" aria-label="メニューを開く"> <div class="space-y-2 w-8"> <span class="block w-full h-0.5 bg-slate-800 transition-transform duration-300 origin-center"></span> <span class="block w-full h-0.5 bg-slate-800 transition-opacity duration-300"></span> <span class="block w-full h-0.5 bg-slate-800 transition-transform duration-300 origin-center"></span> </div> </button> </div> <!-- スマホ用フルスクリーンメニュー --> <nav id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-sm z-40 flex flex-col items-center justify-center space-y-8 opacity-0 pointer-events-none transition-all duration-300"> <a href="/Lab/" class="text-2xl text-slate-800 font-bold hover:text-blue-600 transition mobile-link">ホーム</a> <a href="/Lab/professor" class="text-2xl text-slate-800 font-bold hover:text-blue-600 transition mobile-link">教授紹介</a> <a href="/Lab/members" class="text-2xl text-slate-800 font-bold hover:text-blue-600 transition mobile-link">メンバー</a> <a href="/Lab/research" class="text-2xl text-slate-800 font-bold hover:text-blue-600 transition mobile-link">研究紹介</a> </nav> </header> <script type="module">const s=document.getElementById("menu-btn"),e=document.getElementById("mobile-menu"),t=s?.querySelectorAll("span");s&&e&&t&&(s.addEventListener("click",()=>{!e.classList.contains("pointer-events-none")?(e.classList.add("opacity-0","pointer-events-none"),e.classList.remove("opacity-100","pointer-events-auto"),t[0].classList.remove("rotate-45","translate-y-2.5"),t[1].classList.remove("opacity-0"),t[2].classList.remove("-rotate-45","-translate-y-2.5")):(e.classList.remove("opacity-0","pointer-events-none"),e.classList.add("opacity-100","pointer-events-auto"),t[0].classList.add("rotate-45","translate-y-2.5"),t[1].classList.add("opacity-0"),t[2].classList.add("-rotate-45","-translate-y-2.5"))}),e.querySelectorAll(".mobile-link").forEach(a=>{a.addEventListener("click",()=>{e.classList.add("opacity-0","pointer-events-none"),e.classList.remove("opacity-100","pointer-events-auto"),t[0].classList.remove("rotate-45","translate-y-2.5"),t[1].classList.remove("opacity-0"),t[2].classList.remove("-rotate-45","-translate-y-2.5")})}));</script> <!-- ここに中身が入る -->   <section class="bg-gradient-to-br from-slate-900 to-blue-900 text-white py-24"> <div class="container mx-auto px-6 text-center"> <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
 未知なる流れを、<br>解き明かす。
 </h1> <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
 当研究室では、流体力学・宇宙空気力学・数値解析を駆使し、
         次世代の航空宇宙開発に貢献する先端研究を行っています。
-</p> <div class="mt-8"> <a href="${base}/research" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-3 px-8 rounded-full transition shadow-lg">
+</p> <div class="mt-8"> <a href="/Lab/research" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-3 px-8 rounded-full transition shadow-lg">
 研究内容を見る
 </a> </div> </div> </section>  <section class="container mx-auto px-6 py-16"> <h2 class="text-2xl font-bold text-slate-800 mb-8 border-l-4 border-blue-600 pl-4">最新情報</h2> <div class="bg-white rounded-lg shadow overflow-hidden"> <ul class="divide-y divide-gray-100"> <li>  <a href="/Lab/news/2024-11-01" class="block p-6 hover:bg-blue-50 transition duration-200 group"> <div class="flex flex-col md:flex-row md:items-baseline mb-2"> <span class="text-sm text-blue-600 font-bold w-32 shrink-0 group-hover:text-blue-700"> 2025/7/1 </span> <span class="text-slate-800 font-bold text-lg group-hover:text-blue-800 transition-colors"> 研究室所属の学生がISTSに参加します </span> </div> <p class="text-slate-600 text-sm pl-0 md:pl-32 leading-relaxed line-clamp-2">   </p> <div class="md:pl-32 mt-2 text-blue-500 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
 続きを読む →
